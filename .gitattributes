@@ -1,0 +1,10 @@
+# Keep formatter output stable in Git and Windows checkouts.
+* text=auto
+*.go text eol=lf
+*.mod text eol=lf
+*.sum text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.svg text eol=lf
+*.ps1 text eol=crlf
