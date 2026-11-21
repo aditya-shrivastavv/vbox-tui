@@ -46,6 +46,18 @@ $
 - **OpenSSH client** for SSH features; other actions do not need it.
 - **Go 1.25+** when building from source.
 
+### Download for Windows
+
+Download `vbx-windows-amd64.zip` from the [latest release](https://github.com/aditya-shrivastavv/vbox-tui/releases/latest), extract it, and run `vbx.exe` from PowerShell. Windows x64 is the released binary target. Go is not required for the downloaded executable.
+
+Each release includes `checksums.txt`. Verify the downloaded archive against it:
+
+```powershell
+Get-FileHash .\vbx-windows-amd64.zip -Algorithm SHA256
+```
+
+The executable is unsigned; checksums detect a mismatched download but do not replace publisher signature verification.
+
 ### Build from source
 
 ```powershell
@@ -57,7 +69,7 @@ go build -trimpath -o dist/vbx.exe ./cmd/vbx
 
 Run the executable directly, or put it in a directory already on your `PATH`. Check `Get-Command vbx -All` before installing it under that name: other tools may use it too. This project does not install shell aliases or change your profile.
 
-For builds of a particular revision, inspect the [Windows CI artifacts](https://github.com/aditya-shrivastavv/vbox-tui/actions/workflows/ci.yml). They require a successful workflow run and are development artifacts, not a promised stable release. There is no package-manager installation documented yet.
+For development builds of a particular revision, inspect the [Windows CI artifacts](https://github.com/aditya-shrivastavv/vbox-tui/actions/workflows/ci.yml). There is no package-manager installation documented yet.
 
 ## Quick start
 
