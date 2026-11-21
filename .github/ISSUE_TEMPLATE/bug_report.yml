@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible problem with vbx.
+body:
+  - type: markdown
+    attributes:
+      value: "For vulnerabilities follow SECURITY.md. Redact real usernames, VM names, endpoints, paths and credentials."
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Include vbx --version output.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, terminal and VirtualBox version; use generic paths.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Prefer demo mode and synthetic names where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true

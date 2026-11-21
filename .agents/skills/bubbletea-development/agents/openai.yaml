@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bubble Tea Development"
+  short_description: "Build polished Go terminal apps and inline prompts"
+  default_prompt: "Use $bubbletea-development to build or improve a Go terminal workflow with Bubble Tea."

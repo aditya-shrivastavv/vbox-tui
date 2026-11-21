@@ -1,0 +1,17 @@
+name: Feature request
+description: Suggest an improvement to the quick VM workflow.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What task is difficult today?
+      description: Describe the workflow, not just a button or command.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed interaction
+      description: How should it work in an inline prompt or direct command?
+    validations:
+      required: true

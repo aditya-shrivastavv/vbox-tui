@@ -1,0 +1,57 @@
+name: ci
+
+# Source checkout needs read access. Artifact upload uses its scoped runtime
+# credentials; this workflow does not need repository or Actions write access.
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  windows:
+    # vbox-tui is Windows-first: discovery paths, console behaviour and the
+    # ssh handoff are built for Windows, so CI runs there.
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: gofmt
+        shell: pwsh
+        run: |
+          $bad = & gofmt -l .
+          if ($bad) {
+            $bad | ForEach-Object { Write-Host "unformatted: $_" }
+            exit 1
+          }
+
+      - name: vet
+        run: go vet ./...
+
+      - name: test
+        run: go test -count=1 ./...
+
+      - name: build
+        run: |
+          go build -trimpath -ldflags "-s -w" -o dist\vbx.exe .\cmd\vbx
+          go build -trimpath -ldflags "-s -w" -o dist\vbox-tui.exe .\cmd\vbox-tui
+
+      - name: smoke checks
+        shell: pwsh
+        run: |
+          .\dist\vbx.exe --version
+          .\dist\vbx.exe --help
+          .\dist\vbx.exe config --path
+          .\dist\vbox-tui.exe --version
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vbx-windows
+          path: dist\vbx.exe
